@@ -18,3 +18,39 @@ def readJson(path):
     df = pd.read_json(jsonFile, orient='columns')
 
     return df
+
+def dataDistributionMap(column):
+    '''
+    Fucntion cretaes a map of data distribution in a column of Pandas data frame
+
+    Arguments:
+    column -- A pandas series representing a column
+
+    Returns:
+    map -- a python ditionary of data and number of repetition of that data {'data' : x}
+    '''
+
+    # initializing the map
+    map = {}
+
+    print(type(column[0]))
+    if type(column[0]) == list:
+        for i in range (0, len(column)):
+            for j in range (0, len(column[i])):
+        
+                item = column[i][j]
+
+                if item in map:
+                    map[item] += 1
+                else: 
+                    map[item] = 1
+    else:
+        for i in range (0, len(column)):
+            
+            item = column[i]
+
+            if item in map:
+                map[item] += 1
+            else:
+                map[item] = 1
+    return map
