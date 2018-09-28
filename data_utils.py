@@ -86,16 +86,16 @@ def convertToInputMatrix(recipes, wordToIndex):
     Returns:
     encodedRecipes -- A big numpy matrix that has all the rcipes encoded with zero padding
     '''
-    # find the size of longest recipe in the list
-    longestRecipe = max(len(recipe) for recipe in recipes)
-
+    # size of list of all recipes to create the one hot embedding input
+    recipeSize = len(wordToIndex)
 
     # make a matrix of zeros
-    encodedRecipes = np.zeros((recipes.shape[0], longestRecipe), dtype=int)
+    encodedRecipes = np.zeros((recipes.shape[0], recipeSize), dtype=int)
     
     for i in range(0, len(recipes)):
         for j in range(0, len(recipes[i])):
-            encodedRecipes[i][j] = wordToIndex[recipes[i][j]]
+            index = wordToIndex[recipes[i][j]]
+            encodedRecipes[i][index] = 1
 
     return encodedRecipes
 
